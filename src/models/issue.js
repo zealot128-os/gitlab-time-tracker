@@ -16,7 +16,7 @@ class issue extends hasTimes {
         let promise;
 
         if (create) {
-            promise = this.post(`projects/${encodeURIComponent(project)}/issues`, {title: id});
+            promise = this.post(`projects/${encodeURIComponent(project)}/issues`, {title: id, description: "/assign @" + process.env.USER });
         } else {
             promise = this.get(`projects/${encodeURIComponent(project)}/issues/${id}`);
         }

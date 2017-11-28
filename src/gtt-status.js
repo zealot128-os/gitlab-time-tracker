@@ -22,6 +22,12 @@ tasks.status()
             return;
         }
 
-        frames.forEach(frame => console.log(`Project ${frame.project.magenta} ${frame.resource.type.blue} ${('#' + frame.resource.id).blue} is running, started ${moment(frame.start).fromNow().green} (id: ${frame.id})`));
+      frames.forEach(frame => {
+        console.log(`Project ${frame.project.magenta} ${frame.resource.type.blue} ${('#' + frame.resource.id).blue} is running, started ${moment(frame.start).fromNow().green} (id: ${frame.id})`)
+        if (frame.resource.id) {
+          const url = frame.config.data.url.replace(/api\/v\d\//, frame.project) + "/issues/" + frame.resource.id
+          console.log(url.gray)
+        }
+      });
     })
     .catch(error => Cli.error('Could not read frames.', error));
